@@ -1,0 +1,2 @@
+# dotaliases
+Aliases configuration
