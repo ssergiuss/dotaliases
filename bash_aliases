@@ -1,6 +1,7 @@
 # Bash
 alias l='ls -ahl'
-alias v='mvim'
+alias v='vimr'
+alias vd='vimr --cwd'
 
 # Git
 alias g='git status -sb'
