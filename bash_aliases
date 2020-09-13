@@ -4,7 +4,7 @@ alias v='vimr'
 alias vd='vimr --cwd'
 
 # Git
-alias g='git status -sb'
+alias g='git log --oneline --decorate -10; printf "\n"; git status -sb'
 alias ga='git add --all'
 alias gb='git branch'
 alias gca='git commit --amend'
