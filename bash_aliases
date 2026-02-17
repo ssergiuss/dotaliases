@@ -72,4 +72,14 @@ function gru {
 alias gwp='git worktree prune'
 alias gwr='git worktree remove'
 # Git update
-alias gupd='CURR_BRANCH=`git rev-parse --abbrev-ref HEAD`; git co development; gpr; git co staging; gpr; git co master; gpr; git co $CURR_BRANCH'
+#alias gupd='CURR_BRANCH=`git rev-parse --abbrev-ref HEAD`; git co development; gpr; git co staging; gpr; git co master; gpr; git co $CURR_BRANCH'
+alias gupd='CURR_BRANCH=$(git rev-parse --abbrev-ref HEAD); \
+for BRANCH in staging master; do \
+  if git show-ref --verify --quiet refs/heads/$BRANCH; then \
+    git checkout $BRANCH; git pull --rebase; \
+  else \
+    echo "Branch $BRANCH does not exist."; \
+  fi; \
+done; \
+git checkout $CURR_BRANCH;\
+git remote update origin --prune'
