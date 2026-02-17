@@ -19,8 +19,6 @@ alias gdc='git diff --cached -w'
 alias gdv='git diff'
 alias gdw='git diff --no-ext-diff --word-diff'
 alias gf='git fetch'
-# TODO: find another key mapping? conflict with github cli
-# alias gh='git hist'
 alias gl='git log --oneline --decorate'
 alias gp='git push'
 alias gpf='git push --force-with-lease'
@@ -72,7 +70,6 @@ function gru {
 alias gwp='git worktree prune'
 alias gwr='git worktree remove'
 # Git update
-#alias gupd='CURR_BRANCH=`git rev-parse --abbrev-ref HEAD`; git co development; gpr; git co staging; gpr; git co master; gpr; git co $CURR_BRANCH'
 alias gupd='CURR_BRANCH=$(git rev-parse --abbrev-ref HEAD); \
 for BRANCH in staging master; do \
   if git show-ref --verify --quiet refs/heads/$BRANCH; then \
