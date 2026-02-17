@@ -37,5 +37,39 @@ alias gsl='git stash list'
 alias gsp='git stash pop'
 alias gss='git stash save'
 alias gt='git tag'
+alias gw='git worktree list'
+function gwa {
+  local branch="$1"
+  local prefix="$(basename "$PWD")"
+  if [[ -z "$branch" ]]; then
+    echo "error: branch name required"
+    return 1
+  fi
+  if [[ "$branch" =~ ^(master|main|staging|develop|development)$ ]]; then
+    echo "error: refusing to create worktree for protected branch '$branch'"
+    return 1
+  fi
+  git worktree add "../${prefix}-${branch}" "$branch" && cd "../${prefix}-${branch}"
+}
+function gwab {
+  local branch="$1"
+  local prefix="$(basename "$PWD")"
+  if [[ -z "$branch" ]]; then
+    echo "error: branch name required"
+    return 1
+  fi
+  if [[ "$branch" =~ ^(master|main|staging|develop|development)$ ]]; then
+    echo "error: refusing to create worktree for protected branch '$branch'"
+    return 1
+  fi
+  git worktree add -b "$branch" "../${prefix}-${branch}" && cd "../${prefix}-${branch}"
+}
+# Fetch remote branch and rebase current branch on it (worktree-safe)
+function gru {
+  local branch="${1:-staging}"
+  git fetch origin "$branch" && git rebase "origin/$branch"
+}
+alias gwp='git worktree prune'
+alias gwr='git worktree remove'
 # Git update
 alias gupd='CURR_BRANCH=`git rev-parse --abbrev-ref HEAD`; git co development; gpr; git co staging; gpr; git co master; gpr; git co $CURR_BRANCH'
