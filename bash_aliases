@@ -2,6 +2,10 @@
 alias l='ls -ahl'
 alias v='vimr'
 alias vd='vimr --cwd'
+function webprod-log {
+  local logfile="${1:-app_debug.log}"
+  nvim "scp://webprod//var/partfiniti_production/logs/${logfile}"
+}
 
 # Git
 alias g='git log --oneline --decorate -10; printf "\n"; git status -sb'
