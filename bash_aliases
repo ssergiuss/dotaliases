@@ -12,6 +12,7 @@ alias g='git log --oneline --decorate -10; printf "\n"; git status -sb'
 alias ga='git add --all'
 alias gb='git branch'
 alias gca='git commit --amend'
+alias gcam='git commit --amend -m'
 alias gcm='git commit -m'
 alias gcmnv='git commit --no-verify -m'
 alias gd='git diff --color-words'
@@ -23,7 +24,6 @@ alias gl='git log --oneline --decorate'
 alias gp='git push'
 alias gpf='git push --force-with-lease'
 alias gpr='git pull --rebase'
-# Git prune remote branches
 alias gprb='git remote update origin --prune'
 alias gpp='git pull --rebase && git push'
 alias gra='git rebase --abort'
@@ -33,9 +33,11 @@ alias grs='git rebase --skip'
 alias gs='git stash'
 alias gsl='git stash list'
 alias gsp='git stash pop'
-alias gss='git stash save'
+alias gss='git stash push'
 alias gt='git tag'
 alias gw='git worktree list'
+alias gwp='git worktree prune'
+alias gwr='git worktree remove'
 function gwa {
   local branch="$1"
   local prefix="$(basename "$PWD")"
@@ -67,8 +69,6 @@ function gru {
   local branch="${1:-staging}"
   git fetch origin "$branch" && git rebase "origin/$branch"
 }
-alias gwp='git worktree prune'
-alias gwr='git worktree remove'
 # Git update
 alias gupd='CURR_BRANCH=$(git rev-parse --abbrev-ref HEAD); \
 for BRANCH in staging master; do \
